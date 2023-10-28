@@ -40,7 +40,7 @@ class CarController(
         throw EntityNotFoundException()
     }
 
-    @DeleteMapping("{userId}/car/{carId}")
+    @DeleteMapping("/{userId}/car/{carId}")
     fun deleteCar(userId: Long, carId: Long) {
         carRepository.deleteById(carId)
     }
@@ -50,7 +50,7 @@ class CarController(
         val buildYear: Optional<Int>
     )
 
-    @PatchMapping("{userId}/car/{carId}")
+    @PatchMapping("/{userId}/car/{carId}")
     fun updateCar(userId: Long, carId: Long, updateCarRequest: UpdateCarRequest): Car {
         val user = userRepository.findById(userId)
         user.getOrNull()?.let {
