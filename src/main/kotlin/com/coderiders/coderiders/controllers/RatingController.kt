@@ -28,4 +28,5 @@ class RatingController(
             val buildYear: Optional<Int>
 
     )
+
 }

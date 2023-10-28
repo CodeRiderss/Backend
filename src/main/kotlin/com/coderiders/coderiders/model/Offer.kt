@@ -7,7 +7,7 @@ import jakarta.persistence.Id
 import jakarta.persistence.ManyToOne
 import jakarta.persistence.Table
 import java.time.Instant
-@Table(name = "table_offer1")
+@Table(name = "table_offer")
 @Entity
 class Offer(
    val start:Instant,
