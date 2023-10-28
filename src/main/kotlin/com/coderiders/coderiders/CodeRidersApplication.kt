@@ -67,14 +67,14 @@ class CodeRidersApplication(
                     buildYear = 2017
                 )
             )
-            val offer = offerRepository.save(Offer(
-                start= formater.parse("06.04.2023").toInstant(),
-                end = formater.parse("23.6.2023").toInstant(),
-                place = "Frankfurt HBF",
-                active= true,
-                user = rudi,
-                pricePerHourInCent = 500
-            ))
+//            val offer = offerRepository.save(Offer(
+//                start= formater.parse("06.04.2023").toInstant(),
+//                end = formater.parse("23.6.2023").toInstant(),
+//                place = "Frankfurt HBF",
+//                active= true,
+//                user = rudi,
+//                pricePerHourInCent = 500
+//            ))
 //            val order1 = orderRepository.save(Order(
 //                start= formater.parse("08.04.2023").toInstant(),
 //                end = formater.parse("15.4.2023").toInstant(),
