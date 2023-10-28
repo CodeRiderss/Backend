@@ -11,15 +11,15 @@ spring:
 #      enabled: true
 #      max-file-size: 1000MB
 #      max-request-size: 1000MB
-#  datasource:
-#    url: jdbc:postgresql://10.240.186.43:5432/coderriders
-#    username: user
-#    password: "1234"
   datasource:
-    url: jdbc:h2:mem:mydb
-    username: sa
-    password: password
-    driverClassName: org.h2.Driver
+    url: jdbc:postgresql://10.240.186.43:5432/coderriders
+    username: user
+    password: "1234"
+#  datasource:
+#    url: jdbc:h2:mem:mydb
+#    username: sa
+#    password: password
+#    driverClassName: org.h2.Driver
   jpa:
     hibernate:
       ddl-auto: create
