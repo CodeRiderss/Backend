@@ -11,8 +11,8 @@ import java.time.Instant
 @Table(name = "table_order")
 @Entity
 class Order(
-    val start:Instant,
-    val end:Instant,
+    val startDate:Instant,
+    val endDate:Instant,
     @ManyToOne
     val user:User,
     @Id

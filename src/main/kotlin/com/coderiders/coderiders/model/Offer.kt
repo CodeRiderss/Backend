@@ -7,16 +7,18 @@ import jakarta.persistence.Id
 import jakarta.persistence.ManyToOne
 import jakarta.persistence.Table
 import java.time.Instant
-@Table(name = "table_offer")
+import java.util.*
+
 @Entity
+@Table(name = "table_offer")
 class Offer(
-   val start:Instant,
-    val end:Instant,
-    val place:String,
-    val active:Boolean,
+    val startDate: Instant?,
+    val endDate:Instant?,
+    val place:String?,
+    val active:Boolean?,
    @ManyToOne
-    val user:User,
-    val pricePerHourInCent:Long,
+    val user:User?,
+    val pricePerHourInCent:Long?,
 
     @Id
 @GeneratedValue(strategy = GenerationType.IDENTITY)
