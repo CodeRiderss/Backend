@@ -14,7 +14,7 @@ class CodeRidersApplication(
     private val offerRepository: OfferRepository,
     private val orderRepository: OrderRepository
 ) {
-//    @Bean
+    @Bean
     fun init(carRepository: CarRepository, userRepository: UserRepository, ratingRepository: RatingRepository): CommandLineRunner {
         return CommandLineRunner {
             val format = "dd.mm.yyyy"
@@ -31,7 +31,7 @@ class CodeRidersApplication(
                 name =  "Rudi Rakete",
                 password = "1234",
                 description = "Moin ich bin der Rudi ich wohne in meinen Auto",
-                age = 68,
+                birthday = formater.parse("11.04.1973").toInstant(),
                 experience = "Profi",
                 telephone = "015127594864",
                 email = "rudi.ludolf@gmail.com",
@@ -42,7 +42,7 @@ class CodeRidersApplication(
                 name =  "Beathe Frauke",
                 password = "1234",
                 description = "Hi ich bin die Beathe ich bin neu hier und freue mich auf euch alle <3",
-                age = 36,
+                birthday = formater.parse("17.03.1989").toInstant(),
                 experience = "Neuling",
                 telephone = "015174579367",
                 email = "beathe.frauke@gmail.com",
@@ -53,7 +53,7 @@ class CodeRidersApplication(
                 name =  "Peter Lustig",
                 password = "1234",
                 description = "Hi mein Name ist Peter Lustig, NEIN NICHT DER PETER LUSTIG",
-                age = 23,
+                birthday = formater.parse("23.09.1994").toInstant(),
                 experience = "Neuling",
                 telephone = "0151894725",
                 email = "peter.lustig2@gmail.com",
@@ -67,24 +67,24 @@ class CodeRidersApplication(
                     buildYear = 2017
                 )
             )
-//            val offer = offerRepository.save(Offer(
-//                start= formater.parse("06.04.2023").toInstant(),
-//                end = formater.parse("23.6.2023").toInstant(),
-//                place = "Frankfurt HBF",
-//                active= true,
-//                user = rudi,
-//                pricePerHourInCent = 500
-//            ))
-//            val order1 = orderRepository.save(Order(
-//                start= formater.parse("08.04.2023").toInstant(),
-//                end = formater.parse("15.4.2023").toInstant(),
-//                user = peter
-//            ))
-//            val order2 = orderRepository.save(Order(
-//                start= formater.parse("30.04.2023").toInstant(),
-//                end = formater.parse("4.5.2023").toInstant(),
-//                user = beathe
-//            ))
+            val offer = offerRepository.save(Offer(
+                startDate = formater.parse("06.04.2023").toInstant(),
+                endDate = formater.parse("23.6.2023").toInstant(),
+                place = "Frankfurt HBF",
+                active= true,
+                user = rudi,
+                pricePerHourInCent = 500
+            ))
+            val order1 = orderRepository.save(Order(
+                startDate = formater.parse("08.04.2023").toInstant(),
+                endDate = formater.parse("15.4.2023").toInstant(),
+                user = peter
+            ))
+            val order2 = orderRepository.save(Order(
+                startDate = formater.parse("30.04.2023").toInstant(),
+                endDate = formater.parse("4.5.2023").toInstant(),
+                user = beathe
+            ))
         }
     }
 

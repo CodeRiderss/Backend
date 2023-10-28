@@ -6,6 +6,7 @@ import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
 import jakarta.persistence.OneToMany
 import jakarta.persistence.Table
+import java.time.Instant
 
 @Entity
 @Table(name = "table_user")
@@ -13,7 +14,7 @@ class User(
     val name:String,
     val password:String,
     val description:String,
-    val age:Int,
+    val birthday:Instant,
     val experience:String,
     val telephone:String,
     val email:String,

@@ -26,7 +26,7 @@ class CarController(
     )
 
     @PostMapping("{userId}/car")
-    fun insertCar(userId: Long, @RequestBody car: CarRequest): Car {
+    fun insertCar(@PathVariable userId: Long, @RequestBody car: CarRequest): Car {
         val user = userRepository.findById(userId)
         user.getOrNull()?.let {
             return carRepository.save(
@@ -41,7 +41,7 @@ class CarController(
     }
 
     @DeleteMapping("/{userId}/car/{carId}")
-    fun deleteCar(userId: Long, carId: Long) {
+    fun deleteCar(@PathVariable userId: Long, @PathVariable carId: Long) {
         carRepository.deleteById(carId)
     }
 
@@ -51,17 +51,18 @@ class CarController(
     )
 
     @PatchMapping("/{userId}/car/{carId}")
-    fun updateCar(userId: Long, carId: Long, updateCarRequest: UpdateCarRequest): Car {
+    fun updateCar(@PathVariable userId: Long,@PathVariable carId: Long, updateCarRequest: UpdateCarRequest): Car {
         val user = userRepository.findById(userId)
         user.getOrNull()?.let {
             val car = carRepository.findById(carId)
-            car.getOrNull()?.let { car ->
+            car.getOrNull()?.let { ncar ->
                 val newCar = Car(
-                    id = car.id,
-                    model = updateCarRequest.model.orElse(car.model),
-                    buildYear = updateCarRequest.buildYear.orElse(car.buildYear),
-                    user = car.user
+                    id = ncar.id,
+                    model = updateCarRequest.model.orElse(ncar.model),
+                    buildYear = updateCarRequest.buildYear.orElse(ncar.buildYear),
+                    user = ncar.user
                 )
+                carRepository.save(newCar)
             }
 
         }
