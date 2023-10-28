@@ -25,7 +25,7 @@ class CarController(
         val user: User,
     )
 
-    @PostMapping("{userId}/car")
+    @PostMapping("/user/{userId}/car")
     fun insertCar(@PathVariable userId: Long, @RequestBody car: CarRequest): Car {
         val user = userRepository.findById(userId)
         user.getOrNull()?.let {
