@@ -70,8 +70,9 @@ class CodeRidersApplication(
             val offer = offerRepository.save(Offer(
                 startDate = formater.parse("06.04.2023").toInstant(),
                 endDate = formater.parse("23.6.2023").toInstant(),
-                place = "Frankfurt HBF",
-                active= true,
+                longitude = 50.107312,
+                latitude = 8.664892,
+                active = true,
                 user = rudi,
                 pricePerHourInCent = 500
             ))

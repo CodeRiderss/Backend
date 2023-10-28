@@ -23,7 +23,8 @@ class OfferController(
     data class OfferRequest(
         val startDate: Instant,
         val endDate: Instant,
-        val place: String,
+        val longitude: Double,
+        val latitude: Double,
         val active: Boolean,
         val pricePerHourInCent: Long,
     )
@@ -38,7 +39,8 @@ class OfferController(
                     endDate = offer.endDate,
                     active = offer.active,
                     pricePerHourInCent = offer.pricePerHourInCent,
-                    place = offer.place,
+                    longitude = offer.longitude,
+                    latitude = offer.latitude,
                     user = it
                 )
             )
@@ -54,7 +56,8 @@ class OfferController(
     data class UpdateOfferRequest(
         val startDate: Optional<Instant>,
         val endDate: Optional<Instant>,
-        val place: Optional<String>,
+        val longitude: Optional<Double>,
+        val latitude: Optional<Double>,
         val active: Optional<Boolean>,
         val pricePerHourInCent: Optional<Long>,
     )
@@ -70,7 +73,8 @@ class OfferController(
                     user = it,
                     startDate = updateOfferRequest.startDate.orElse(offer.startDate),
                     endDate = updateOfferRequest.endDate.orElse(offer.endDate),
-                    place = updateOfferRequest.place.orElse(offer.place),
+                    latitude = updateOfferRequest.latitude.orElse(offer.latitude),
+                    longitude = updateOfferRequest.longitude.orElse(offer.longitude),
                     active = updateOfferRequest.active.orElse(offer.active),
                     pricePerHourInCent = updateOfferRequest.pricePerHourInCent.orElse(offer.pricePerHourInCent)
                 )

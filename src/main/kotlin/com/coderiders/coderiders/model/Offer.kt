@@ -8,8 +8,10 @@ import java.time.Instant
 class Offer(
     val startDate: Instant,
     val endDate: Instant,
-    val place: String,
+    val longitude: Double,
+    val latitude: Double,
     val active: Boolean,
+
     @ManyToOne
     val user: User,
     val pricePerHourInCent: Long,
