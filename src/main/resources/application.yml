@@ -12,12 +12,12 @@ spring:
 #      max-file-size: 1000MB
 #      max-request-size: 1000MB
   datasource:
-    url: jdbc:postgresql://localhost:5432/coderriders
+    url: jdbc:postgresql://10.240.186.43:5432/coderriders
     username: user
     password: "1234"
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: create
   sql:
     init:
       mode: always
