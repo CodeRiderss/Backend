@@ -11,8 +11,7 @@ import jakarta.persistence.Table
 class Rating(
     val rating:Int,
     val description:String,
-) {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    var id: Long? = null;
-}
+    var id: Long? = null,
+)

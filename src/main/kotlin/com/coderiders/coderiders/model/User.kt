@@ -18,9 +18,8 @@ class User(
     val telephone:String,
     val email:String,
     @OneToMany
-    val ratings:List<Rating>
-) {
+    val ratings:List<Rating>,
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    var id: Long? = null;
-}
+@GeneratedValue(strategy = GenerationType.IDENTITY)
+var id: Long? = null,
+)

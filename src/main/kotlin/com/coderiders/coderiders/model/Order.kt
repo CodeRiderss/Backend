@@ -15,8 +15,7 @@ class Order(
     val end:Instant,
     @ManyToOne
     val user:User,
-) {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    var id: Long? = null;
-}
+    var id: Long? = null
+)
