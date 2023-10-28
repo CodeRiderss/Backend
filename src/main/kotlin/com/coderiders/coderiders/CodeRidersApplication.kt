@@ -14,7 +14,7 @@ class CodeRidersApplication(
     private val offerRepository: OfferRepository,
     private val orderRepository: OrderRepository
 ) {
-    @Bean
+//    @Bean
     fun init(carRepository: CarRepository, userRepository: UserRepository, ratingRepository: RatingRepository): CommandLineRunner {
         return CommandLineRunner {
             val format = "dd.mm.yyyy"
