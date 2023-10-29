@@ -6,6 +6,7 @@ import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
 import jakarta.persistence.ManyToOne
 import jakarta.persistence.Table
+import java.time.Duration
 import java.time.Instant
 
 @Table(name = "table_order")
@@ -20,4 +21,6 @@ class Order(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long? = null
-)
+){
+    val priceInEuro = (Duration.between(startDate, endDate).toHours() * offer.pricePerHourInCent).div(100.0)
+}

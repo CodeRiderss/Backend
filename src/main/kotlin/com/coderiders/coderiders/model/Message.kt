@@ -19,6 +19,6 @@ class Message(
     @ManyToOne
     val to: User,
 ) {
-    val fromId = from.id
-    val toId= to.id
+    val fromUserId = from.id
+    val toUserId= to.id
 }

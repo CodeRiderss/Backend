@@ -23,6 +23,10 @@ class OrderController(
     fun getOrder(): List<Order> {
         return orderRepository.findAll()
     }
+    @GetMapping("/order/{orderId}")
+    fun getSingleOrder(@PathVariable orderId:Long): Optional<Order> {
+        return orderRepository.findById(orderId)
+    }
     data class NewOrder(
         val startDate:Instant,
         val endDate:Instant,
@@ -32,22 +36,10 @@ class OrderController(
         val priceInEuro:Double
     )
     @GetMapping("/user/{userId}/order")
-    fun getOrderByUser(@PathVariable userId: Long): List<NewOrder> {
+    fun getOrderByUser(@PathVariable userId: Long): List<Order> {
 
         userRepository.findById(userId).getOrNull()?.let {
-            val order = orderRepository.findAllByUser(it)
-            return order.map {
-                val price = Duration.between(it.startDate, it.endDate).toHours() * it.offer.pricePerHourInCent
-                NewOrder(
-                    startDate = it.startDate,
-                    endDate = it.endDate,
-                    user = it.user,
-                    offer = it.offer,
-                    id = it.id,
-                    priceInEuro = price.div(100.0)
-                )
-
-            }.toList()
+            return orderRepository.findAllByUser(it)
         }
         return listOf()
     }

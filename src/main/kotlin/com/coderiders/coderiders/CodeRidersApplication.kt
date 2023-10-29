@@ -26,7 +26,7 @@ class CodeRidersApplication(
             val formater = SimpleDateFormat(format)
             val rating1 = ratingRepository.save(
                 Rating(
-                    rating = 1,
+                    rating = 3,
                     description = "Rudis Auto stinkt ein bisschen"
                 )
             )
@@ -45,7 +45,7 @@ class CodeRidersApplication(
                     experience = "Profi",
                     telephone = "015127594864",
                     email = "rudi.ludolf@gmail.com",
-                    profileUrl = "https://plus.unsplash.com/premium_photo-1681822817140-bce6c12809fb?auto=format&fit=crop&q=80&w=2672&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+                    profileUrl = "https://get.pxhere.com/photo/man-person-people-white-boy-cute-male-portrait-young-professional-profession-lifestyle-smiling-smile-cheerful-fun-happy-happiness-glasses-handsome-865531.jpg",
                     ratings = listOf(rating1, rating2)
                 )
             )
@@ -58,6 +58,7 @@ class CodeRidersApplication(
                     experience = "Neuling",
                     telephone = "015174579367",
                     email = "beathe.frauke@gmail.com",
+                    profileUrl = "https://c.pxhere.com/photos/78/1d/beautiful_girl_in_the_park_lying_on_the_leaves_autumn_portrait_romantic_park_feeling_in_love-1198265.jpg",
                     ratings = listOf()
                 )
             )
@@ -70,6 +71,7 @@ class CodeRidersApplication(
                     experience = "Neuling",
                     telephone = "0151894725",
                     email = "peter.lustig@gmail.com",
+                    profileUrl = "https://plus.unsplash.com/premium_photo-1681822817140-bce6c12809fb?auto=format&fit=crop&q=80&w=2672&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
                     ratings = listOf()
                 )
             )
@@ -84,7 +86,7 @@ class CodeRidersApplication(
             val offer = offerRepository.save(
                 Offer(
                     startDate = formater.parse("06.04.2023").toInstant(),
-                    endDate = formater.parse("23.6.2023").toInstant(),
+                    endDate = formater.parse("23.06.2023").toInstant(),
                     latitude = 50.107312,
                     longitude = 8.664892,
                     active = true,
@@ -96,7 +98,7 @@ class CodeRidersApplication(
             val order1 = orderRepository.save(
                 Order(
                     startDate = formater.parse("08.04.2023").toInstant(),
-                    endDate = formater.parse("15.4.2023").toInstant(),
+                    endDate = formater.parse("15.04.2023").toInstant(),
                     user = peter,
                     offer = offer
                 )
@@ -104,7 +106,7 @@ class CodeRidersApplication(
             val order2 = orderRepository.save(
                 Order(
                     startDate = formater.parse("30.04.2023").toInstant(),
-                    endDate = formater.parse("4.5.2023").toInstant(),
+                    endDate = formater.parse("04.05.2023").toInstant(),
                     user = beathe,
                     offer = offer
                 )
@@ -135,6 +137,12 @@ class CodeRidersApplication(
                     to = rudi,
                 )
             )
+            val rating3 = ratingRepository.save(
+                Rating(
+                    rating = 5,
+                    description = "Echt geile Karre! Riecht auch nicht!"
+                )
+            )
             val franz = userRepository.save(
                 User(
                     name = "Franz Funkenstein",
@@ -144,19 +152,27 @@ class CodeRidersApplication(
                     experience = "Neuling",
                     telephone = "0151894725",
                     email = "franz.funkenstein@gmail.com",
-                    ratings = listOf()
+                    ratings = listOf(rating3)
+                )
+            )
+            val audi = carRepository.save(
+                Car(
+                    model = "Audi A5 Coupe",
+                    user = rudi,
+                    buildYear = 2017,
+                    imageUrl = "https://www.audibusinessinnovation.com/content/dam/nemo/models/a5/a5-coupe/my-2022/derivative-startpage/stage/1920x1080-AA5_191009_2.jpg?imwidth=768"
                 )
             )
             val offer2 = offerRepository.save(
                 Offer(
                     startDate = formater.parse("01.01.2023").toInstant(),
                     endDate = formater.parse("24.12.2023").toInstant(),
-                    latitude = 50.107312,
-                    longitude = 8.664892,
+                    latitude = 50.55949718158492,
+                    longitude = 9.691078129095068,
                     active = true,
                     user = franz,
                     pricePerHourInCent = 200,
-                    car = vw
+                    car = audi
                 )
             )
             val message4 = messageRepository.save(
@@ -170,7 +186,7 @@ class CodeRidersApplication(
             val order3 = orderRepository.save(
                 Order(
                     startDate = formater.parse("01.04.2023").toInstant(),
-                    endDate = formater.parse("01.5.2023").toInstant(),
+                    endDate = formater.parse("01.05.2023").toInstant(),
                     user = rudi,
                     offer = offer2
                 )
@@ -178,7 +194,7 @@ class CodeRidersApplication(
             val order4 = orderRepository.save(
                 Order(
                     startDate = formater.parse("01.04.2023").toInstant(),
-                    endDate = formater.parse("01.5.2023").toInstant(),
+                    endDate = formater.parse("01.05.2023").toInstant(),
                     user = peter,
                     offer = offer2
                 )
