@@ -1,8 +1,11 @@
 package com.coderiders.coderiders.controllers
 
+import com.coderiders.coderiders.model.Rating
 import com.coderiders.coderiders.model.User
 import com.coderiders.coderiders.repository.UserRepository
+import com.fasterxml.jackson.annotation.JsonIgnore
 import jakarta.persistence.EntityNotFoundException
+import jakarta.persistence.OneToMany
 import org.springframework.web.bind.annotation.*
 import java.time.Instant
 import java.util.*
@@ -16,9 +19,20 @@ class UserController(
     fun getUser(): List<User> {
         return userRepository.findAll()
     }
+
+    data class SingleUser(
+    val name:String,
+    val description:String,
+    val birthday:Instant,
+    val experience:String,
+    val telephone:String,
+    val email:String,
+    val averageRating:Double
+    )
     @GetMapping("/user/{userId}")
-    fun getSingelUser(@PathVariable userId:Long): Optional<User> {
-        return userRepository.findById(userId)
+    fun getSingelUser(@PathVariable userId:Long): User? {
+        val user = userRepository.findById(userId)
+        return user.getOrNull()
     }
 
 
@@ -29,6 +43,7 @@ class UserController(
         val birthday: Instant,
         val experience: String,
         val telephone: String,
+        val profileUrl:  Optional<String>,
         val email: String,
     )
 
@@ -43,6 +58,7 @@ class UserController(
                 experience = newUser.experience,
                 telephone = newUser.telephone,
                 email = newUser.email,
+                profileUrl = newUser.profileUrl.getOrNull(),
                 ratings = listOf()
             )
         )
@@ -76,6 +92,7 @@ class UserController(
         val experience: Optional<String>,
         val telephone: Optional<String>,
         val email: Optional<String>,
+        val profileUrl: Optional<String>,
     )
 
     @PatchMapping("/{userId}")
@@ -92,6 +109,7 @@ class UserController(
                     telephone = updateUser.experience.orElse(user.telephone),
                     email = updateUser.email.orElse(user.email),
                     ratings = user.ratings,
+                    profileUrl =  updateUser.profileUrl.orElse(user.profileUrl),
                     id = user.id
                 )
             )

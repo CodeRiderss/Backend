@@ -19,6 +19,14 @@ class RatingController(
     fun getRating(): List<Rating> {
         return ratingRepository.findAll()
     }
+    @GetMapping("/user/{userId}/rating")
+    fun getRating(@PathVariable userId:Long): List<Rating> {
+        val user = userRepository.findById(userId)
+        user.getOrNull()?.let {
+            return it.ratings
+        }
+        return listOf()
+    }
 
     class RatingRequest(
             val rating: Int,
@@ -26,7 +34,7 @@ class RatingController(
 
     )
 
-    @PostMapping("/{userId}/rating")
+    @PostMapping("/user/{userId}/rating")
     fun insertRating(userId: Long, @RequestBody rating: RatingRequest): Rating {
         val user = userRepository.findById(userId)
         user.getOrNull()?.let {
@@ -44,7 +52,7 @@ class RatingController(
     }
 
 
-    @DeleteMapping("/{userId}/rating/{ratingId}")
+    @DeleteMapping("/user/{userId}/rating/{ratingId}")
     fun deleteRating(userId: Long, ratingId: Long) {
         ratingRepository.deleteById(ratingId)
 
@@ -56,7 +64,7 @@ class RatingController(
 
             )
 
-    @PatchMapping("/{userId}/rating/{ratingId}")
+    @PatchMapping("/user/{userId}/rating/{ratingId}")
     fun updateRating(userId: Long, ratingId: Long, updateRatingRequest: UpdateRatingRequest): Rating {
         val user = userRepository.findById(userId)
         user.getOrNull()?.let {

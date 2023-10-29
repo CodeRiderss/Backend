@@ -1,5 +1,6 @@
 package com.coderiders.coderiders.model
 
+import com.fasterxml.jackson.annotation.JsonIgnore
 import jakarta.persistence.*
 import java.time.Instant
 
@@ -11,10 +12,13 @@ class Message(
     var id: Long? = null,
     val text: String,
     val time: Instant,
-    @OneToOne
+    @JsonIgnore
+    @ManyToOne
     val from: User,
-    @OneToOne
-val to: User,
+    @JsonIgnore
+    @ManyToOne
+    val to: User,
 ) {
-
+    val fromId = from.id
+    val toId= to.id
 }

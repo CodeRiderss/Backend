@@ -7,6 +7,8 @@ import org.springframework.data.jpa.repository.Query
 import org.springframework.data.repository.query.Param
 
 interface MessageRepository: JpaRepository<Message,Long> {
-    @Query("SELECT m from Message m where m.to = :receiver or m.to = :sender or m.from = :sender or m.from = :receiver")
-    fun findAllMessagesBySenderOrReceiver(@Param("receiver") receiver: User,@Param("sender") sender: User ):List<Message>
+    @Query("SELECT m from Message m where (m.to = :receiver or m.to = :sender) and (m.from = :sender or m.from = :receiver) order by m.time asc")
+    fun findAllMessagesBySenderAndReceiver(@Param("receiver") receiver: User,@Param("sender") sender: User ):List<Message>
+    @Query("SELECT m from Message m where (m.to = :user or m.from = :user)")
+    fun findAllMessagesByUser(@Param("user") user: User) :List<Message>
 }

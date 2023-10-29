@@ -1,5 +1,6 @@
 package com.coderiders.coderiders.controllers
 
+import com.coderiders.coderiders.model.Car
 import com.coderiders.coderiders.model.Offer
 import com.coderiders.coderiders.repository.OfferRepository
 import com.coderiders.coderiders.repository.UserRepository
@@ -19,6 +20,15 @@ class OfferController(
         return offerRepository.findAll()
     }
 
+    @GetMapping("/user/{userId}/offer")
+    fun getOfferByUser(@PathVariable userId: Long): List<Offer> {
+        val user = userRepository.findById(userId)
+        user?.getOrNull()?.let {
+            return offerRepository.findAllByUser(it)
+        }
+        return listOf()
+    }
+
 
     data class OfferRequest(
         val startDate: Instant,
@@ -27,9 +37,10 @@ class OfferController(
         val latitude: Double,
         val active: Boolean,
         val pricePerHourInCent: Long,
+        val car: Car
     )
 
-    @PostMapping("{userId}/offer")
+    @PostMapping("/user/{userId}/offer")
     fun insertOffer(userId: Long, @RequestBody offer: OfferRequest): Offer {
         val user = userRepository.findById(userId)
         user.getOrNull()?.let {
@@ -41,7 +52,8 @@ class OfferController(
                     pricePerHourInCent = offer.pricePerHourInCent,
                     longitude = offer.longitude,
                     latitude = offer.latitude,
-                    user = it
+                    user = it,
+                    car = offer.car
                 )
             )
         }
@@ -60,6 +72,7 @@ class OfferController(
         val latitude: Optional<Double>,
         val active: Optional<Boolean>,
         val pricePerHourInCent: Optional<Long>,
+        val car: Optional<Car>,
     )
 
     @PatchMapping("/{userId}/offer/{offerId}")
@@ -76,7 +89,8 @@ class OfferController(
                     latitude = updateOfferRequest.latitude.orElse(offer.latitude),
                     longitude = updateOfferRequest.longitude.orElse(offer.longitude),
                     active = updateOfferRequest.active.orElse(offer.active),
-                    pricePerHourInCent = updateOfferRequest.pricePerHourInCent.orElse(offer.pricePerHourInCent)
+                    pricePerHourInCent = updateOfferRequest.pricePerHourInCent.orElse(offer.pricePerHourInCent),
+                    car = updateOfferRequest.car.orElse(offer.car),
                 )
                 offerRepository.save(newOffer)
             }

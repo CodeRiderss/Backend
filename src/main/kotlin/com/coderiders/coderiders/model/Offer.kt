@@ -13,10 +13,15 @@ class Offer(
     val active: Boolean,
 
     @ManyToOne
+    val car: Car,
+
+    @ManyToOne
     val user: User,
     val pricePerHourInCent: Long,
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long? = null
-)
+){
+
+}
