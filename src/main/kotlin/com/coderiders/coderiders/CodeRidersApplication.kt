@@ -22,7 +22,7 @@ class CodeRidersApplication(
         ratingRepository: RatingRepository
     ): CommandLineRunner {
         return CommandLineRunner {
-            val format = "dd.mm.yyyy"
+            val format = "dd.MM.yyyy"
             val formater = SimpleDateFormat(format)
             val rating1 = ratingRepository.save(
                 Rating(
@@ -58,8 +58,20 @@ class CodeRidersApplication(
                     experience = "Neuling",
                     telephone = "015174579367",
                     email = "beathe.frauke@gmail.com",
-                    profileUrl = "https://c.pxhere.com/photos/78/1d/beautiful_girl_in_the_park_lying_on_the_leaves_autumn_portrait_romantic_park_feeling_in_love-1198265.jpg",
+                    profileUrl = "https://landfrauen-wilstedt.de/wp-content/uploads/2021/04/Beate-Gerken.jpg",
                     ratings = listOf()
+                )
+            )
+            val rating4 = ratingRepository.save(
+                Rating(
+                    rating = 5,
+                    description = "Peter hat echt einen tollen Humor!"
+                )
+            )
+            val rating5 = ratingRepository.save(
+                Rating(
+                    rating = 5,
+                    description = "Peter Audi macht echt Laune"
                 )
             )
             val peter = userRepository.save(
@@ -72,7 +84,7 @@ class CodeRidersApplication(
                     telephone = "0151894725",
                     email = "peter.lustig@gmail.com",
                     profileUrl = "https://plus.unsplash.com/premium_photo-1681822817140-bce6c12809fb?auto=format&fit=crop&q=80&w=2672&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-                    ratings = listOf()
+                    ratings = listOf(rating4, rating5)
                 )
             )
             val vw = carRepository.save(
@@ -132,9 +144,33 @@ class CodeRidersApplication(
             val message3 = messageRepository.save(
                 Message(
                     text = "Ok ich fahr mit Bus",
-                    time = formater.parse("08.04.2023").toInstant(),
+                    time = formater.parse("09.04.2023").toInstant(),
                     from = peter,
                     to = rudi,
+                )
+            )
+            val message5 = messageRepository.save(
+                Message(
+                    text = "Hi wie gehts du hast da was vergessen im Auto!",
+                    time = formater.parse("10.04.2023").toInstant(),
+                    from = peter,
+                    to = beathe,
+                )
+            )
+            val message6 = messageRepository.save(
+                Message(
+                    text = "Ah vielen LIEBEN Dank!!!",
+                    time = formater.parse("11.04.2023").toInstant(),
+                    from = beathe,
+                    to = peter,
+                )
+            )
+            val message7 = messageRepository.save(
+                Message(
+                    text = "Kein Problem",
+                    time = formater.parse("12.04.2023").toInstant(),
+                    from = beathe,
+                    to = peter,
                 )
             )
             val rating3 = ratingRepository.save(
@@ -186,15 +222,15 @@ class CodeRidersApplication(
             val order3 = orderRepository.save(
                 Order(
                     startDate = formater.parse("01.04.2023").toInstant(),
-                    endDate = formater.parse("01.05.2023").toInstant(),
+                    endDate = formater.parse("01.12.2023").toInstant(),
                     user = rudi,
                     offer = offer2
                 )
             )
             val order4 = orderRepository.save(
                 Order(
-                    startDate = formater.parse("01.04.2023").toInstant(),
-                    endDate = formater.parse("01.05.2023").toInstant(),
+                    startDate = formater.parse("21.10.2023").toInstant(),
+                    endDate = formater.parse("01.11.2023").toInstant(),
                     user = peter,
                     offer = offer2
                 )

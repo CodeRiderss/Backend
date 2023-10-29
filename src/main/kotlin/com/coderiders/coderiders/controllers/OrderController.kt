@@ -27,14 +27,6 @@ class OrderController(
     fun getSingleOrder(@PathVariable orderId:Long): Optional<Order> {
         return orderRepository.findById(orderId)
     }
-    data class NewOrder(
-        val startDate:Instant,
-        val endDate:Instant,
-        val user:User,
-        val offer: Offer,
-        var id: Long? = null,
-        val priceInEuro:Double
-    )
     @GetMapping("/user/{userId}/order")
     fun getOrderByUser(@PathVariable userId: Long): List<Order> {
 
@@ -52,7 +44,7 @@ class OrderController(
         )
 
     @PostMapping("/user/{userId}/order")
-    fun insertOrder(userId: Long, @RequestBody order: OrderRequest): Order{
+    fun insertOrder(@PathVariable userId: Long, @RequestBody order: OrderRequest): Order?{
         val user = userRepository.findById(userId)
         val offer = offerRepository.findById(order.offerId)
         offer.getOrNull()?.let {
@@ -72,18 +64,17 @@ class OrderController(
     }
 
     @DeleteMapping("/user/{userId}/order/{orderId}")
-    fun deleteOrder(userId: Long, orderId: Long) {
+    fun deleteOrder(@PathVariable userId: Long,@PathVariable orderId: Long) {
         orderRepository.deleteById(orderId)
     }
 
     data class UpdateOrderRequest(
         val startDate:Optional<Instant>,
         val endDate:Optional<Instant>,
-        val userId: Optional<Long>,
     )
 
     @PatchMapping("/user/{userId}/order/{orderId}")
-    fun updateOrder(userId: Long, orderId: Long, updateOrderRequest: UpdateOrderRequest): Order{
+    fun updateOrder(@PathVariable userId: Long,@PathVariable orderId: Long, @RequestBody updateOrderRequest: UpdateOrderRequest): Order{
         val user = userRepository.findById(userId)
         user.getOrNull()?.let {
             val order = orderRepository.findById(orderId)
